@@ -7,7 +7,7 @@ fn main() {
 
     // use of match expression to pattern match against variable "name"
     match name.trim() {
-        "Good Bye" => println!("Sorry to see you go."),
+        "good bye" => println!("Sorry to see you go."),
         "hello" => println!("Hi, nice to meet you!"),
         _ => println!("I can't find a greeting, good bye."),
     }
