@@ -5,8 +5,8 @@ fn main() {
             continue;
         }
         println!("i = {}", i);
-        if i == 7 {
-            // Exit loop when i is 7
+        if i == 21 {
+            // Exit loop when i is 21
             break;
         }
     }
