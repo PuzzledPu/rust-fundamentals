@@ -1,29 +1,19 @@
+use std::env;
 use std::fs::File;
-use std::io::{BufRead, BufReader};
+use std::io::{self, BufRead, BufReader};
 
-fn main() {
-    let file = File::open("non_existent_file.txt");
-    let file = match file {
-        Ok(file) => file,
-        Err(error) => {
-            match error.kind() {
-                std::io::ErrorKind::NotFound => {
-                    panic!("File not found: {}", error)
-                }
-                _ => {
-                    panic!("Error opening file: {}", error)
-                }
-            }
-        }
-    };
-    
+fn main() -> io::Result<()> {
+    let filename = env::args().nth(1).unwrap_or_else(|| {
+        eprintln!("Usage: {} <filename>", env::args().next().unwrap_or_else(|| "file-reader".into()));
+        std::process::exit(1);
+    });
+
+    let file = File::open(&filename)?;
     let reader = BufReader::new(file);
+
     for line in reader.lines() {
-        match line {
-            Ok(line) => println!("{}", line),
-            Err(error) => {
-                panic!("Error reading line: {}", error)
-            }
-        }
+        println!("{}", line?);
     }
+
+    Ok(())
 }
