@@ -17,6 +17,7 @@ pub enum Direction {
         East,
         South,
         West,
-        NorthEast
+        NorthEast,
+        SouthEast
     }
 
